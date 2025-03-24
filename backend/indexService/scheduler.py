@@ -1,6 +1,6 @@
 from logger import Logger
 
-from file_database import FileDatabase
+from backend.file_database import FileDatabase
 from crawler import FileCrawler
 
 def indexFiles():

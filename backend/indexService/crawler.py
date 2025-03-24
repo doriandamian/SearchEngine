@@ -1,6 +1,6 @@
 import os, time
 
-from file_database import FileDatabase
+from backend.file_database import FileDatabase
 
 class FileCrawler:
     def __init__(self, root_dir = "/Users/doriandamian", ignoredDirs = [".git", "__pycache__"]):
