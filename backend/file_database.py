@@ -7,7 +7,7 @@ class FileDatabase:
     def insertFile(self, fileData):
         cursor = self.conn.cursor()
         cursor.execute('''
-            INSERT INTO files (path, title, extension, content, created_at, modified_at, size)
+            INSERT OR IGNORE INTO files (path, title, extension, content, created_at, modified_at, size)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', fileData)
         self.conn.commit()
