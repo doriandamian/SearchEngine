@@ -1,3 +1,15 @@
+CREATE TABLE "files" (
+	"id"	INTEGER UNIQUE,
+	"path"	TEXT NOT NULL,
+	"title"	TEXT NOT NULL,
+	"extension"	TEXT NOT NULL,
+	"content"	TEXT NOT NULL,
+	"created_at"	TEXT NOT NULL,
+	"modified_at"	TEXT NOT NULL,
+	"size"	INTEGER NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
 create virtual table files_fts using fts5(
 	id, path, title, extension, content
 );
@@ -22,7 +34,7 @@ BEGIN
 	values (NEW.id, NEW.path, NEW.title, NEW.extension,NEW.content);
 end
 
-CREATE TRIGGER delete_files_fts after delete on files
-begin
-	delete from files_fts where id = OLD.id;
-end
+CREATE TRIGGER delete_files_fts AFTER DELETE ON files
+BEGIN
+    DELETE FROM files_fts WHERE id = OLD.id;
+END;
