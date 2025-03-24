@@ -1,0 +1,23 @@
+<div class="container">
+  <form id="searchForm">
+    <input
+      type="text"
+      id="searchInput"
+      name="searchInput"
+      placeholder="Enter title or content"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch()"
+    />
+  </form>
+  <div id="results">
+    <ul id="file-list">
+      @for (file of files; track $index) {
+      <li class="fileLi">
+        Path: {{ file[0] }} <br />
+        File: {{ file[1] }}{{ file[2] }} <br />
+        Content: {{ file[3] }} <br />
+      </li>
+      }
+    </ul>
+  </div>
+</div>
