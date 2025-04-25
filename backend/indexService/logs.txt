@@ -1,25 +1,3 @@
-
-
-Indexing started at 2025-03-24 11:42:56.
-(0:00:00.000077) [LOG] - All files indexed succesfully.
-Indexing stopped at 2025-03-24 11:42:56. Total time: 0:00:00.000081. Total new files indexed: 0.
-
-Indexing started at 2025-03-24 11:43:00.
-(0:00:00.000071) [LOG] - All files indexed succesfully.
-Indexing stopped at 2025-03-24 11:43:00. Total time: 0:00:00.000074. Total new files indexed: 0.
-
-Indexing started at 2025-03-24 11:43:15.
-(0:00:00.000141) [LOG] - All files indexed succesfully.
-Indexing stopped at 2025-03-24 11:43:15. Total time: 0:00:00.000148. Total new files indexed: 0.
-
-Indexing started at 2025-03-24 11:43:48.
-(0:00:00.000102) [LOG] - All files indexed succesfully.
-Indexing stopped at 2025-03-24 11:43:48. Total time: 0:00:00.000107. Total new files indexed: 0.
-
-Indexing started at 2025-03-24 11:43:52.
-(0:00:00.000113) [LOG] - All files indexed succesfully.
-Indexing stopped at 2025-03-24 11:43:52. Total time: 0:00:00.000119. Total new files indexed: 0.
-
 Indexing started at 2025-03-24 11:46:04.
 (0:00:00.089232) [LOG] - File /Users/doriandamian/.plastic4/logs/unityplastic.relevant.log.txt modified. Removing old entry from database.
 (0:00:00.089329) [LOG] - File /Users/doriandamian/.plastic4/logs/unityplastic.relevant.log.txt added to the indexing list.
