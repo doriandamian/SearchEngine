@@ -1,13 +1,34 @@
 <div class="container">
-  <form id="searchForm">
+  <form id="searchForm" (ngSubmit)="onSearch()">
     <input
       type="text"
-      id="searchInput"
-      name="searchInput"
-      placeholder="Enter title or content"
-      [(ngModel)]="searchQuery"
-      (ngModelChange)="onSearch()"
+      id="pathInput"
+      name="path"
+      placeholder="Path"
+      [(ngModel)]="path"
     />
+    <input
+      type="text"
+      id="titleInput"
+      name="title"
+      placeholder="Title"
+      [(ngModel)]="title"
+    />
+    <input
+      type="text"
+      id="extensionInput"
+      name="extension"
+      placeholder="Extension"
+      [(ngModel)]="extension"
+    />
+    <input
+      type="text"
+      id="contentsInput"
+      name="contents"
+      placeholder="Contents"
+      [(ngModel)]="contents"
+    />
+    <button type="submit">Search</button>
   </form>
   <div id="results">
     <ul id="file-list">

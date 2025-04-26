@@ -14,16 +14,29 @@ class FileDatabase:
 
     def searchFiles(self, query):
         cursor = self.conn.cursor()
+        wheres = []
+        params = []
 
-        cursor.execute("""
+        for key, values in query.items():
+            temp = []
+            for value in values:
+                temp.append(f"fts.{key} LIKE ?")
+                params.append(f"%{value}%")
+            wheres.append(f"({' AND '.join(temp)})")
+        
+        if wheres:
+            whereString = ' AND '.join(wheres)
+        else:
+            whereString = "1=1"
+
+        cursor.execute(f"""
         SELECT f.path, f.title, f.extension, f.content, f.created_at, f.modified_at, f.size
         FROM files AS f
-        INNER JOIN files_fts AS fts
-        ON f.id = fts.id
-        WHERE fts.title LIKE ? OR fts.content LIKE ?
+        INNER JOIN files_fts AS fts ON f.id = fts.id
+        WHERE {whereString}
         ORDER BY bm25(files_fts)
         LIMIT 20;
-        """, (f"%{query}%", f"%{query}%"))
+        """, params)
 
         results = cursor.fetchall()
         return results
