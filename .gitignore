@@ -1,2 +1,6 @@
-database/database.db
+# Backend
 backend/__pycache__
+
+# Database
+database/database.db
+database/sqlscript.sql

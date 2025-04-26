@@ -13,7 +13,7 @@ class FileCrawler:
         filesData = []
 
         for dirPath, dirNames, fileNames in os.walk(self.root_dir):
-            dirNames[:] = [d for d in dirNames if d not in self.ignoredDirs and not d.startswith('.')]
+            dirNames[:] = [d for d in dirNames if d not in self.ignoredDirs and not d.startswith(('.', '@'))]
 
             for file in fileNames:
                 filePath = os.path.join(dirPath, file)
