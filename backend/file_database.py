@@ -17,15 +17,15 @@ class FileDatabase:
         )
         self.conn.commit()
 
-    def insertSearch(self, keyword):
+    def insertSearch(self, keyword, search_type):
         cursor = self.conn.cursor()
         cursor.execute(
             """
-            INSERT INTO searches (keyword, searched_at)
-            VALUES (?, ?)
-            ON CONFLICT(keyword) DO UPDATE SET searched_at=excluded.searched_at
+            INSERT INTO searches (keyword, search_type, searched_at)
+            VALUES (?, ?, ?)
+            ON CONFLICT(keyword, search_type) DO UPDATE SET searched_at=excluded.searched_at
         """,
-            (keyword, time.ctime()),
+            (keyword, search_type, time.ctime()),
         )
         self.conn.commit()
 
