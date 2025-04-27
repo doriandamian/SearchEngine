@@ -23,12 +23,14 @@ def search_files():
     for title in titles:
         if title.strip():
             queries.append(f"title:{title.strip()}")
+            db.insertSearch(title.strip())
     for extension in extensions:
         if extension.strip():
             queries.append(f"extension:{extension.strip()}")
     for content in contents:
         if content.strip():
-            queries.append(f"contents:{content.strip()}")
+            queries.append(f"content:{content.strip()}")
+            db.insertSearch(content.strip())
 
     if not queries:
         return jsonify({"error": "No query found"}), 400

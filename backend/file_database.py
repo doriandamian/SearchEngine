@@ -1,4 +1,5 @@
 import sqlite3
+import time
 
 class FileDatabase:
     def __init__(self, dbName = "database.db"):
@@ -7,10 +8,25 @@ class FileDatabase:
     def insertFile(self, fileData):
         cursor = self.conn.cursor()
         cursor.execute('''
-            INSERT OR IGNORE INTO files (path, title, extension, content, created_at, modified_at, size)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT OR IGNORE INTO files (path, title, extension, content, created_at, modified_at, size, score)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
         ''', fileData)
         self.conn.commit()
+
+    def insertSearch(self, keyword):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            INSERT INTO searches (keyword, searched_at)
+            VALUES (?, ?)
+            ON CONFLICT(keyword) DO UPDATE SET searched_at=excluded.searched_at
+        ''', (keyword, time.ctime()))
+        self.conn.commit()
+
+    def getSearches(self):
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT keyword FROM searches ORDER BY searched_at DESC")
+        results = cursor.fetchall()
+        return [row[0] for row in results]
 
     def searchFiles(self, query):
         cursor = self.conn.cursor()
@@ -41,7 +57,7 @@ class FileDatabase:
             whereString = "1=1"
 
         cursor.execute(f"""
-        SELECT f.path, f.title, f.extension, f.content, f.created_at, f.modified_at, f.size, {scoreFormula} as score
+        SELECT f.path, f.title, f.extension, f.content, f.created_at, f.modified_at, f.size, f.score
         FROM files AS f
         INNER JOIN files_fts AS fts ON f.id = fts.id
         WHERE {whereString}
