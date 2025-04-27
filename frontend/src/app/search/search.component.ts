@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FileSearchService } from '../services/file-search.service';
 import { FormsModule } from '@angular/forms';
 import { Query } from '../models/query.model';
@@ -10,7 +10,7 @@ import { Query } from '../models/query.model';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   path: string = '';
   title: string = '';
   extension: string = '';
@@ -18,7 +18,57 @@ export class SearchComponent {
 
   files: any[] = [];
 
+  pathSuggestions: string[] = [];
+  titleSuggestions: string[] = [];
+  extensionSuggestions: string[] = [];
+  contentsSuggestions: string[] = [];
+
   private searchService = inject(FileSearchService);
+
+  ngOnInit(): void {
+    this.getSearchHistory();
+  }
+
+  getSearchHistory(): void {
+    this.searchService.getSearchHistory().subscribe(
+      (history) => {
+        console.log(history);
+        this.updateSuggestions(history);
+      },
+      (error) => {
+        console.error('Error fetching search history', error);
+      }
+    );
+  }
+
+  updateSuggestions(searchHistory: string[]): void {
+    this.pathSuggestions = [];
+    this.titleSuggestions = [];
+    this.extensionSuggestions = [];
+    this.contentsSuggestions = [];
+
+    // Loop through the search history and categorize them
+    searchHistory.forEach(([keyword, category]) => {
+      switch (category) {
+        case 'path':
+          this.pathSuggestions.push(keyword);
+          break;
+        case 'title':
+          this.titleSuggestions.push(keyword);
+          break;
+        case 'extension':
+          this.extensionSuggestions.push(keyword);
+          break;
+        case 'content':
+          this.contentsSuggestions.push(keyword);
+          break;
+        default:
+          console.warn(`Unknown category: ${category}`);
+      }
+    });
+
+    console.log(this.pathSuggestions, this.titleSuggestions);
+  }
 
   onSearch() {
     let query = new Query();

@@ -8,10 +8,13 @@ import { Query } from '../models/query.model';
 })
 export class FileSearchService {
   private apiUrl = 'http://127.0.0.1:5000/search';
+  private historyUrl = 'http://127.0.0.1:5000/history';
 
   constructor(private httpClient: HttpClient) {}
 
-  getSearchHistory()
+  getSearchHistory(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.historyUrl);
+  }
 
   getFiles(query: Query): Observable<any[]> {
     let params = new HttpParams();

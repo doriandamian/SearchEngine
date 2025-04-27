@@ -13,7 +13,7 @@ db = FileDatabase()
 @app.route("/history", methods=["GET"])
 def get_search_history():
     recent_searches = db.getSearches()
-    return jsonify({"search_history": recent_searches})
+    return jsonify(recent_searches)
 
 
 @app.route("/search", methods=["GET"])

@@ -6,28 +6,52 @@
       name="path"
       placeholder="Path"
       [(ngModel)]="path"
+      list="path-suggestions"
     />
+    <datalist id="path-suggestions">
+      @for (pathSuggestion of pathSuggestions; track $index) {
+      <option [value]="pathSuggestion"></option>
+      }
+    </datalist>
     <input
       type="text"
       id="titleInput"
       name="title"
       placeholder="Title"
       [(ngModel)]="title"
+      list="title-suggestions"
     />
+    <datalist id="title-suggestions">
+      @for (titleSuggestion of titleSuggestions; track $index) {
+      <option [value]="titleSuggestion"></option>
+      }
+    </datalist>
     <input
       type="text"
       id="extensionInput"
       name="extension"
       placeholder="Extension"
       [(ngModel)]="extension"
+      list="extension-suggestions"
     />
+    <datalist id="extension-suggestions">
+      @for (extensionSuggestion of extensionSuggestions; track $index) {
+      <option [value]="extensionSuggestion"></option>
+      }
+    </datalist>
     <input
       type="text"
       id="contentsInput"
       name="contents"
       placeholder="Contents"
       [(ngModel)]="contents"
+      list="content-suggestions"
     />
+    <datalist id="content-suggestions">
+      @for (contentSuggestion of contentsSuggestions; track $index) {
+      <option [value]="contentSuggestion"></option>
+      }
+    </datalist>
     <button type="submit">Search</button>
   </form>
   <div id="results">
@@ -37,6 +61,7 @@
         Path: {{ file[0] }} <br />
         File: {{ file[1] }}{{ file[2] }} <br />
         Content: {{ file[3] }} <br />
+        Score: {{ file[7] }}
       </li>
       }
     </ul>
