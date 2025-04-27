@@ -11,6 +11,8 @@ export class FileSearchService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getSearchHistory()
+
   getFiles(query: Query): Observable<any[]> {
     let params = new HttpParams();
 

@@ -31,9 +31,11 @@ class FileDatabase:
 
     def getSearches(self):
         cursor = self.conn.cursor()
-        cursor.execute("SELECT keyword FROM searches ORDER BY searched_at DESC")
+        cursor.execute(
+            "SELECT keyword, search_type FROM searches ORDER BY searched_at DESC"
+        )
         results = cursor.fetchall()
-        return [row[0] for row in results]
+        return results
 
     def searchFiles(self, query):
         cursor = self.conn.cursor()
