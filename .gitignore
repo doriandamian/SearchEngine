@@ -1,6 +1,6 @@
 # Backend
 backend/__pycache__
-backend/logs/logs.txt
+backend/logs
 
 # Database
 database/database.db
