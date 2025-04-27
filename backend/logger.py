@@ -1,8 +1,11 @@
 from datetime import datetime
 
+
 class Logger:
     def __init__(self):
-        self.stringBuilder = f"\n\nIndexing started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}.\n"
+        self.stringBuilder = (
+            f"\n\nIndexing started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}.\n"
+        )
         self.startTime = datetime.now()
 
     def addLog(self, log):

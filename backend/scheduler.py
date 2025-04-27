@@ -1,7 +1,7 @@
+from crawler import FileCrawler
 from file_database import FileDatabase
 from logger import Logger
 
-from crawler import FileCrawler
 
 def indexFiles():
     crawler = FileCrawler()
@@ -16,5 +16,6 @@ def indexFiles():
 
     logger.addLog(f"All files indexed succesfully.")
     logger.finish(fileCount)
+
 
 indexFiles()

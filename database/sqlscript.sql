@@ -7,11 +7,17 @@ CREATE TABLE "files" (
 	"created_at"	TEXT NOT NULL,
 	"modified_at"	TEXT NOT NULL,
 	"size"	INTEGER NOT NULL,
+	"score" INTEGER NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
 create virtual table files_fts using fts5(
 	id, path, title, extension, content
+);
+
+CREATE TABLE searches (
+    keyword TEXT PRIMARY KEY,
+    searched_at TEXT
 );
 
 CREATE TRIGGER update_files_fts
