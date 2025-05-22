@@ -8,7 +8,7 @@ class FileCrawler:
     def __init__(
         self,
         root_dir="/Users/doriandamian",
-        ignoredDirs=[".git", "__pycache__", "Applications", "Parallels", "Library"],
+        ignoredDirs=[".git", "__pycache__", "Applications", "Parallels", "Library", "node_modules"],
     ):
         self.root_dir = root_dir
         self.ignoredDirs = ignoredDirs
