@@ -1,6 +1,6 @@
 from parser import Parser
-
 from file_database import FileDatabase
+from spelling_corrector import correction
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -30,16 +30,18 @@ def search_files():
             db.insertSearch(path.strip(), "path")
     for title in titles:
         if title.strip():
-            queries.append(f"title:{title.strip()}")
-            db.insertSearch(title.strip(), "title")
+            corrected = correction(title.strip())
+            queries.append(f"title:{corrected}")
+            db.insertSearch(corrected, "title")
     for extension in extensions:
         if extension.strip():
             queries.append(f"extension:{extension.strip()}")
             db.insertSearch(extension.strip(), "extension")
     for content in contents:
         if content.strip():
-            queries.append(f"content:{content.strip()}")
-            db.insertSearch(content.strip(), "content")
+            corrected = correction(content.strip())
+            queries.append(f"content:{corrected}")
+            db.insertSearch(corrected, "content")
 
     if not queries:
         return jsonify({"error": "No query found"}), 400
@@ -48,8 +50,7 @@ def search_files():
     query = Parser.parseQuery(query)
     result = db.searchFiles(query)
 
-    return jsonify(result)
-
+    return jsonify({"result":result}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

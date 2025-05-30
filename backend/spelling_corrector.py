@@ -3,7 +3,7 @@ from collections import Counter
 
 def words(text): return re.findall(r'\w+', text.lower())
 
-WORDS = Counter(words(open('big.txt').read()))
+WORDS = Counter(words(open('sp_files/big.txt').read()))
 
 def known(words):
     return set(w for w in words if w in WORDS)
@@ -23,8 +23,8 @@ def edits1(word):
 def edits2(word):
     return (e2 for e1 in edits1(word) for e2 in edits1(e1))
 
-def correction(word):
-    return max(candidates(word), key=P)
-
 def candidates(word):
     return (known([word]) or known(edits1(word)) or known(edits2(word)) or [word])
+
+def correction(word):
+    return max(candidates(word), key=P)
