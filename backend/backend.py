@@ -1,14 +1,15 @@
 from parser import Parser
 from file_database import FileDatabase
 from spelling_corrector import correction
+from widgets.widget_factory import WidgetFactory
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="*")
 
 db = FileDatabase()
-
+widget_factory = WidgetFactory()
 
 @app.route("/history", methods=["GET"])
 def get_search_history():
@@ -50,7 +51,12 @@ def search_files():
     query = Parser.parseQuery(query)
     result = db.searchFiles(query)
 
-    return jsonify({"result":result}), 200
+    widgets = widget_factory.get_widgets(query, result)
+
+    return jsonify({
+        "result":result,
+        "widgets": widgets    
+    }), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

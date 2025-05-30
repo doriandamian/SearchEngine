@@ -16,7 +16,7 @@ export class FileSearchService {
     return this.httpClient.get<any[]>(this.historyUrl);
   }
 
-  getFiles(query: Query): Observable<any[]> {
+  search(query: Query): Observable<{ result: any[]; widgets: any[] }> {
     let params = new HttpParams();
 
     if (query.path)
@@ -30,6 +30,8 @@ export class FileSearchService {
       for (const value of query.contents)
         params = params.append('contents', value);
 
-    return this.httpClient.get<any[]>(this.apiUrl, { params });
+    return this.httpClient.get<{ result: any[]; widgets: any[] }>(this.apiUrl, {
+      params,
+    });
   }
 }

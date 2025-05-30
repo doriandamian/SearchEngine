@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
   contents: string = '';
 
   files: any[] = [];
+  widgets: any[] = [];
 
   pathSuggestions: string[] = [];
   titleSuggestions: string[] = [];
@@ -32,7 +33,6 @@ export class SearchComponent implements OnInit {
   getSearchHistory(): void {
     this.searchService.getSearchHistory().subscribe(
       (history) => {
-        console.log(history);
         this.updateSuggestions(history);
       },
       (error) => {
@@ -66,8 +66,6 @@ export class SearchComponent implements OnInit {
           console.warn(`Unknown category: ${category}`);
       }
     });
-
-    console.log(this.pathSuggestions, this.titleSuggestions);
   }
 
   onSearch() {
@@ -98,11 +96,11 @@ export class SearchComponent implements OnInit {
         .map((c) => c.trim());
     }
 
-    console.log('Sending Query: ', query);
-
-    this.searchService.getFiles(query).subscribe(
+    this.searchService.search(query).subscribe(
       (response) => {
-        this.files = response;
+        this.files = response['result'];
+        this.widgets = response['widgets'];
+        console.log(this.widgets);
       },
       (error) => {
         console.error('Error fetching files', error);
