@@ -1,8 +1,28 @@
-#results {
-    width: 80%;
-}
+.container {
+  width: 80vw;
 
-.fileLi {
-    border: 2px solid;
-    margin: 10px;
+  form {
+    display: flex;
+    gap: 20px;
+  }
+
+  .mainData {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .results {
+      width: 80%;
+
+      .fileLi {
+        overflow: hidden;
+        border: 2px solid;
+        margin: 10px;
+      }
+    }
+
+    .widgets {
+      width: auto;
+    }
+  }
 }

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FileSearchService } from '../services/file-search.service';
 import { FormsModule } from '@angular/forms';
 import { Query } from '../models/query.model';
+import { WidgetGeneratorComponent } from "./widget-generator/widget-generator.component";
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, WidgetGeneratorComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
